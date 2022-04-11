@@ -10,7 +10,7 @@ export class HelperService {
     constructor() {}
 
     manageStateChanges(list: any[], ctx: any) {
-		const state = ctx.stateList$.value
+        const state = ctx.stateList$.value
 		let newlistState: any = [];
         list.map((el) => {
             if (el.type === "added") {
@@ -27,8 +27,9 @@ export class HelperService {
                     return data.id === el.id ? el : data;
                 });
             }
-		});
-	  ctx.setState({list: newlistState });
+        });
+        ctx.stateList$.next(newlistState)
+	    ctx.setState({list: newlistState });
 
     }
 }
