@@ -9,7 +9,7 @@ export class TodoListService {
 
   getTodoList(collection: string): Observable<any> {
     let listCollection = this.afs.collection(collection)
-    return listCollection.stateChanges().pipe(
+    return listCollection.snapshotChanges().pipe(
       map((dataRes) => {
         return dataRes.map((list: any) => ({
           ...list.payload.doc.data(),
