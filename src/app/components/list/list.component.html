@@ -6,8 +6,7 @@
 ></textarea>
 <input type="submit" (click)="addItemList()" />
 <ul *ngFor="let item of list$ | async">
- 
-  <li *ngIf="item.collection===collect">
+  <li>
     <div class="delete" (click)="deleteItem(item.id)">Delete ❌</div>
     <div
       *ngIf="!isEdit || (item.id != id && isEdit)"
