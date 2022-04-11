@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { StateContext } from "@ngxs/store";
+import { map } from "rxjs/operators";
 import { TodoStateModel } from "../store/todolist.state";
 
 @Injectable({
@@ -8,9 +9,9 @@ import { TodoStateModel } from "../store/todolist.state";
 export class HelperService {
     constructor() {}
 
-    manageStateChanges(list: any[], ctx: StateContext<any>) {
-        const state = ctx.getState().list;
-        let newlistState: any = [];
+    manageStateChanges(list: any[], ctx: any) {
+		const state = ctx.stateList$.value
+		let newlistState: any = [];
         list.map((el) => {
             if (el.type === "added") {
                 if (!state.length) {
@@ -26,7 +27,8 @@ export class HelperService {
                     return data.id === el.id ? el : data;
                 });
             }
-        });
-        ctx.patchState({ list: newlistState });
+		});
+	  ctx.setState({list: newlistState });
+
     }
 }

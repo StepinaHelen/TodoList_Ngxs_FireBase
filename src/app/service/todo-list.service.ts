@@ -3,34 +3,32 @@ import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TodoListService {
   constructor(private afs: AngularFirestore) {}
 
-  getTodoList(): Observable<any> {
-    let listCollection = this.afs.collection('todoList')
+  getTodoList(collection: string): Observable<any> {
+    let listCollection = this.afs.collection(collection)
     return listCollection.stateChanges().pipe(
       map((dataRes) => {
         return dataRes.map((list: any) => ({
           ...list.payload.doc.data(),
           id: list.payload.doc.id,
-          type: list.type,
+          type: list.type
         }))
       }),
     )
   }
 
-  addListItem(text: any): any {
-    this.afs.collection('todoList').add({ text })
+  addListItem(text: any, collection: string): any {
+    this.afs.collection(collection).add({ text })
   }
 
-  deleteListItem(id: string) {
-    this.afs.doc('todoList/' + id).delete()
+  deleteListItem(id: string, collection: string): any {
+    this.afs.doc(collection + '/' + id).delete()
   }
 
-  updateListItem(id: string, text: string) {
-    this.afs.doc('todoList/' + id).update({ text })
+  updateListItem(id: string, text: string, collection: string):any {
+    this.afs.doc(collection + '/' + id).update({ text })
   }
 }

@@ -1,0 +1,77 @@
+input,
+textarea {
+    display: block;
+    width: 99%;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: none;
+    border-bottom: 1px solid #414a59 !important;
+    border: 0;
+    color: #fff;
+}
+.edit-text {
+    width: 99%;
+    background: #2b2c2d;
+    margin-top: 20px;
+}
+input[type="submit"] {
+    background-color: #ffcc00;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 50px;
+    padding: 20px;
+    width: 100%;
+}
+
+ul {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+ul li {
+    background-color: #414a59;
+    padding: 20px;
+    margin-bottom: 2px;
+    color: #bec8d9;
+}
+
+.delete {
+    position: absolute;
+    right: 20px;
+    background-color: #edeae1;
+    color: #000;
+    width: 75px;
+    padding: 3px 5px;
+    line-height: 15px;
+    height: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.edit {
+    position: absolute;
+    right: 115px;
+    background-color: #edeae1;
+    color: #000;
+    width: 60px;
+    padding: 3px 10px 3px 15px;
+    line-height: 15px;
+    height: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.save {
+    position: absolute;
+    top: 20px;
+    right: 115px;
+    background-color: #edeae1;
+    color: #000;
+    width: 65px;
+    padding: 3px 10px 3px 15px;
+    line-height: 15px;
+    height: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}

@@ -1,0 +1,26 @@
+
+<textarea
+  [(ngModel)]="text"
+  name="text"
+  placeholder="What should be done?"
+></textarea>
+<input type="submit" (click)="addItemList()" />
+<ul *ngFor="let item of list$ | async">
+ 
+  <li *ngIf="item.collection===collect">
+    <div class="delete" (click)="deleteItem(item.id)">Delete ❌</div>
+    <div
+      *ngIf="!isEdit || (item.id != id && isEdit)"
+      class="edit"
+      (click)="updateItem(item.id, item.text)"
+    >
+      Edit ✏️
+    </div>
+    <strong>{{ item.text }}</strong>
+
+    <div *ngIf="isEdit && item.id === id">
+      <textarea class="edit-text" type="text" [(ngModel)]="editText"></textarea>
+      <div class="save" (click)="saveItem()">Save ✔️</div>
+    </div>
+  </li>
+</ul>
