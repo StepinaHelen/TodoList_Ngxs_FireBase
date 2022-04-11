@@ -9,33 +9,41 @@ export interface TodoState {
 
 @Injectable()
 export class TodoListStore extends ComponentStore<TodoState> {
-  constructor(
-    private todoListService: TodoListService
-  ) {
+  constructor(private todoListService: TodoListService) {
     super({ list: [] })
   }
   public stateList$: BehaviorSubject<any> = new BehaviorSubject<any>([])
 
-    readonly list$: Observable<any> = this.select((state) => state.list
+  readonly list$: Observable<any> = this.select((state) => state.list)
+
+  readonly addItem = this.updater(
+    (state, value: any) => (
+      this.stateList$.next(state.list),
+      {
+        list: this.todoListService.addListItem(value.text, value.collection),
+      }
+    ),
   )
 
-    readonly addItem = this.updater((state, value: any) => (
-    this.stateList$.next(state.list),{
-    list: this.todoListService.addListItem(value.text, value.collection),
-  }))
-
-    readonly deleteItem = this.updater((state, value: any) => (
-    this.stateList$.next(state.list),
-        {
-    list: this.todoListService.deleteListItem(value.id, value.collection),
-  }))
-
-    readonly editItem = this.updater((state, value: any) => (
-    this.stateList$.next(state.list),{
-    list: this.todoListService.updateListItem(
-      value.id,
-      value.text,
-      value.collection,
+  readonly deleteItem = this.updater(
+    (state, value: any) => (
+      this.stateList$.next(state.list),
+      {
+        list: this.todoListService.deleteListItem(value.id, value.collection),
+      }
     ),
-  }))
+  )
+
+  readonly editItem = this.updater(
+    (state, value: any) => (
+      this.stateList$.next(state.list),
+      {
+        list: this.todoListService.updateListItem(
+          value.id,
+          value.text,
+          value.collection,
+        ),
+      }
+    ),
+  )
 }
